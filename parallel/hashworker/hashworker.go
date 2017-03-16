@@ -29,11 +29,10 @@ func (this HashWorker) Worker(ic <-chan parallel.SyncedByte, oc chan<- parallel.
 		panic("HashWorker was not initiated with a valid hash, unable to continue.")
 	}
 	sb := parallel.SyncedByte{Buffer: nil, State: parallel.WriterBuffer}
-	// Declare ready for owrk
+	// Declare ready for work
 	oc <- sb
 	// init hash State
 	// this.Reset() // Unnecessary, this is in the constructor.  Left as a reminder.
-	ll := 0
 
 HashWorkerExit:
 	for {
@@ -41,7 +40,6 @@ HashWorkerExit:
 		switch sb.State {
 		case parallel.ReaderBuffer:
 			// work
-			ll += len(sb.Buffer)
 			this.hash.Write(sb.Buffer)
 			sb.State = parallel.WriterBuffer
 			oc <- sb
@@ -71,7 +69,7 @@ func (this HashSegsWorker) Worker(ic <-chan parallel.SyncedByte, oc chan<- paral
 		panic("HashSegsWorker was not initiated completely with a valid hash or name or rollover value,  unable to continue.")
 	}
 	sb := parallel.SyncedByte{Buffer: nil, State: parallel.WriterBuffer}
-	// Declare ready for owrk
+	// Declare ready for work
 	oc <- sb
 	var ll, lb, lseg uint64 = 0, 0, 0
 	hashSegs := map[uint64]string{}
