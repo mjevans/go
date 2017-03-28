@@ -981,3 +981,52 @@ func (f *FlagSet) Init(name string, errorHandling ErrorHandling) {
 	f.name = name
 	f.errorHandling = errorHandling
 }
+
+// Actual returns the Flag structure of the named flag, returning nil if none exists. // FIXME: Will this? I should test...
+func (f *FlagSet) Actual(name string) *Flag {
+	return f.actual[name]
+}
+
+// Actual returns the Flag structure of the named command-line flag,
+// returning nil if none exists.
+func Actual(name string) *Flag {
+	return CommandLine.actual[name]
+}
+
+// IsSet provides a boolean test on the flag
+func (f *FlagSet) IsSet(name string) bool {
+	_, r := f.actual[name]
+	return r
+}
+
+// IsSet provides a boolean test on the flag in the default command-line object
+func IsSet(name string) bool {
+	_, r := CommandLine.actual[name]
+	return r
+}
+
+// I'm probably going to be happy enough with just the above.
+
+// IsUnset provides a boolean test on the flag
+func (f *FlagSet) IsSet(name string) bool {
+	_, r := f.actual[name]
+	return !r
+}
+
+// IsUnset provides a boolean test on the flag in the default command-line object
+func IsSet(name string) bool {
+	_, r := CommandLine.actual[name]
+	return !r
+}
+
+// IsNULL provides a boolean test on the flag
+func (f *FlagSet) IsSet(name string) bool {
+	_, r := f.actual[name]
+	return !r
+}
+
+// IsNULL provides a boolean test on the flag in the default command-line object
+func IsSet(name string) bool {
+	_, r := CommandLine.actual[name]
+	return !r
+}
