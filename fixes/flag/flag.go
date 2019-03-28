@@ -1008,25 +1008,25 @@ func IsSet(name string) bool {
 // I'm probably going to be happy enough with just the above.
 
 // IsUnset provides a boolean test on the flag
-func (f *FlagSet) IsSet(name string) bool {
+func (f *FlagSet) IsUnset(name string) bool {
 	_, r := f.actual[name]
 	return !r
 }
 
 // IsUnset provides a boolean test on the flag in the default command-line object
-func IsSet(name string) bool {
+func IsUnset(name string) bool {
 	_, r := CommandLine.actual[name]
 	return !r
 }
 
 // IsNULL provides a boolean test on the flag
-func (f *FlagSet) IsSet(name string) bool {
+func (f *FlagSet) IsNULL(name string) bool {
 	_, r := f.actual[name]
 	return !r
 }
 
 // IsNULL provides a boolean test on the flag in the default command-line object
-func IsSet(name string) bool {
+func IsNULL(name string) bool {
 	_, r := CommandLine.actual[name]
 	return !r
 }
